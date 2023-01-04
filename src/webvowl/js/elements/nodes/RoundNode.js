@@ -180,31 +180,39 @@ module.exports = (function () {
      * @param parentElement the element to which this node will be appended
      * @param [additionalCssClasses] additional css classes
      */
+    var initialRadius = 0;
     this.draw = function (parentElement, additionalCssClasses) {
+      if (initialRadius == 0) {
+        initialRadius = that.radius();
+      }
       let text = that.labelForCurrentLanguage();
       if (text) {
         // 100 radius ; 8.8 line height
         var textSplitted = text.split(" ");
         var maxText = textSplitted[0];
         var maxTextI = 0;
-        var r = that.radius();
+        var r = initialRadius;
+        var numberOfLines = textSplitted.length;
         for (let i = 0; i < textSplitted.length; i++) {
           if (textSplitted[i].length > maxText.length) {
             maxText = textSplitted[i];
             maxTextI = i;
           }
-          var height = (r / (textSplitted.length / 2)) * (i % (textSplitted.length / 2));
-          console.log(r + ":" + height);
         }
+        //console.log(maxTextI, numberOfLines, (maxTextI % (numberOfLines / 2)) + 1);
+        var height = 12.5 * ((maxTextI % (numberOfLines / 2)) + 0.5); //8.8;
+        var halfWidthAtHeight = Math.sqrt((r ^ 2) - (height ^ 2));
+        console.log(r + " - " + height + " - " + halfWidthAtHeight);
 
-        var radiusPerCharacter = 50 / 12;
-        var radiusPerRow = 50 / 7;
-        console.log(maxText, text.length);
+        var heightRRatio = height / r;
 
-        var charRadius = radiusPerCharacter * maxText.length;
-        var rowRadius = radiusPerRow * textSplitted.length;
-        var newRadius = charRadius > rowRadius ? charRadius : rowRadius;
-        that.radius(newRadius);
+        var charsPerRadius = 2.5;
+        var wantedWidth = maxText.length / charsPerRadius;
+        var newRadius = (height / halfWidthAtHeight) * wantedWidth;
+        newRadius = newRadius * (1 / heightRRatio);
+        //console.log(halfWidthAtHeight, newRadius, r);
+
+        //that.radius(newRadius);
       }
       var cssClasses = that.collectCssClasses();
       that.nodeElement(parentElement);
