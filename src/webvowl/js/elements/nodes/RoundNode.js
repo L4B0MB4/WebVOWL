@@ -175,6 +175,19 @@ module.exports = (function () {
       collapsingGroupElement.append("line").attr("x1", 20).attr("y1", 6).attr("x2", 20).attr("y2", 18);
     };
 
+    const getNewRadius = (text, r, i, numberOfLines) => {
+      var height = 12.5 * ((i % (numberOfLines / 2)) + 0.5); //+ 0.5 because we want the middle of the text line
+
+      //console.log(height, i);
+
+      var charsPerRadius = 0.25;
+      var wantedWidth = text.length / charsPerRadius;
+
+      var newRadius = Math.sqrt(Math.pow(wantedWidth, 2) + Math.pow(height, 2));
+      //console.log(wantedWidth, height, newRadius, r);
+      return newRadius;
+    };
+
     /**
      * Draws a circular node.
      * @param parentElement the element to which this node will be appended
@@ -193,26 +206,19 @@ module.exports = (function () {
         var maxTextI = 0;
         var r = initialRadius;
         var numberOfLines = textSplitted.length;
+        var newRadius = r;
         for (let i = 0; i < textSplitted.length; i++) {
           if (textSplitted[i].length > maxText.length) {
             maxText = textSplitted[i];
+          }
+          var radiusCalc = getNewRadius(textSplitted[i], r, i, numberOfLines);
+          if (radiusCalc > newRadius) {
+            newRadius = radiusCalc;
             maxTextI = i;
           }
         }
-        //console.log(maxTextI, numberOfLines, (maxTextI % (numberOfLines / 2)) + 1);
-        var height = 12.5 * ((maxTextI % (numberOfLines / 2)) + 0.5); //8.8;
-        var halfWidthAtHeight = Math.sqrt((r ^ 2) - (height ^ 2));
-        console.log(r + " - " + height + " - " + halfWidthAtHeight);
-
-        var heightRRatio = height / r;
-
-        var charsPerRadius = 2.5;
-        var wantedWidth = maxText.length / charsPerRadius;
-        var newRadius = (height / halfWidthAtHeight) * wantedWidth;
-        newRadius = newRadius * (1 / heightRRatio);
-        //console.log(halfWidthAtHeight, newRadius, r);
-
-        //that.radius(newRadius);
+        console.log(newRadius, maxTextI);
+        that.radius(newRadius);
       }
       var cssClasses = that.collectCssClasses();
       that.nodeElement(parentElement);

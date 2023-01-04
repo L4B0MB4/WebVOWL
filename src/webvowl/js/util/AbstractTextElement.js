@@ -1,7 +1,6 @@
 module.exports = AbstractTextElement;
 
 function AbstractTextElement(container, backgroundColor) {
-  console.log("asd");
   var textcontainer = container.append("g");
   var textBlock = container
     .append("text")

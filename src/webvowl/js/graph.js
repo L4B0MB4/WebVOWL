@@ -1611,7 +1611,6 @@ module.exports = function (graphContainerSelector) {
     // generate dictionary here ;
     generateDictionary(unfilteredData);
 
-    console.log("hier");
     parser.parseSettings();
     graphUpdateRequired = parser.settingsImported();
     centerGraphViewOnLoad = true;

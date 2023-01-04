@@ -13,7 +13,6 @@ CenteringTextElement.prototype = Object.create(AbstractTextElement.prototype);
 CenteringTextElement.prototype.constructor = CenteringTextElement;
 
 CenteringTextElement.prototype.addText = function (text, prefix, suffix) {
-  console.log(text);
   if (text) {
     this.addTextline(text, this.CSS_CLASSES.default, prefix, suffix);
   }
