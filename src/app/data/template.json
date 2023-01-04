@@ -6,20 +6,13 @@
     }
   ],
   "header": {
-    "languages": [
-      "all",
-      "occurring",
-      "languages"
-    ],
+    "languages": ["all", "occurring", "languages"],
     "title": {
       "language": "label"
     },
     "iri": "",
     "version": "",
-    "author": [
-      "Author One",
-      "Author Two"
-    ],
+    "author": ["Author One", "Author Two"],
     "description": {
       "language": "label"
     },
@@ -73,25 +66,11 @@
         }
       ],
       "comment": "",
-      "equivalent": [
-        ""
-      ],
-      "union": [
-        ""
-      ],
-      "intersection": [
-        ""
-      ],
-      "complement": [
-        ""
-      ],
-      "attributes": [
-        "deprecated",
-        "external",
-        "datatype",
-        "object",
-        "rdf"
-      ]
+      "equivalent": [""],
+      "union": [""],
+      "intersection": [""],
+      "complement": [""],
+      "attributes": ["deprecated", "external", "datatype", "object", "rdf"]
     }
   ],
   "datatype": [
@@ -117,9 +96,7 @@
         }
       ],
       "comment": "",
-      "equivalent": [
-        ""
-      ]
+      "equivalent": [""]
     }
   ],
   "property": [
@@ -141,12 +118,8 @@
       "cardinality": "",
       "minCardinality": "",
       "maxCardinality": "",
-      "subproperty": [
-        ""
-      ],
-      "equivalent": [
-        ""
-      ],
+      "subproperty": [""],
+      "equivalent": [""],
       "attributes": [
         "deprecated",
         "external",
